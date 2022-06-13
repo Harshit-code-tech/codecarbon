@@ -12,6 +12,7 @@ from typing import Dict, Optional, Tuple
 
 import pandas as pd
 from rapidfuzz import fuzz, process, utils
+import psutil
 
 from codecarbon.core.rapl import RAPLFile
 from codecarbon.core.units import Time
@@ -40,6 +41,21 @@ def is_rapl_available() -> bool:
         logger.debug(
             "Not using the RAPL interface, an exception occurred while instantiating "
             + f"IntelRAPL : {e}",
+        )
+        return False
+
+
+def is_psutil_available():
+    try:
+        cpu_load = psutil.cpu_percent(interval=0.1)
+        if cpu_load > 0.0:
+            return True
+        else:
+            return False
+    except Exception as e:
+        logger.debug(
+            "Not using the psutil interface, an exception occurred while instantiating "
+            + f"psutil.cpu_percent : {e}",
         )
         return False
 
