@@ -347,7 +347,11 @@ class BaseEmissionsTracker(ABC):
                         "No CPU tracking mode found. Falling back on CPU load mode."
                     )
                     hardware = CPU.from_utils(
-                        self._output_dir, MODE_CPU_LOAD, model, power
+                        self._output_dir,
+                        MODE_CPU_LOAD,
+                        model,
+                        power,
+                        tracking_mode=self._tracking_mode,
                     )
                 else:
                     logger.warning(
@@ -364,7 +368,11 @@ class BaseEmissionsTracker(ABC):
                         "Failed to match CPU TDP constant. Falling back on CPU load mode."
                     )
                     hardware = CPU.from_utils(
-                        self._output_dir, MODE_CPU_LOAD, model, power
+                        self._output_dir,
+                        MODE_CPU_LOAD,
+                        model,
+                        power,
+                        tracking_mode=self._tracking_mode,
                     )
                 else:
                     logger.warning(
@@ -730,8 +738,7 @@ class BaseEmissionsTracker(ABC):
                 logger.error(f"Unknown hardware type: {hardware} ({type(hardware)})")
             h_time = time.time() - h_time
             logger.debug(
-                f"{hardware.__class__.__name__} : {hardware.total_power().W:,.2f} "
-                + f"W during {last_duration:,.2f} s [measurement time: {h_time:,.4f}]"
+                f"Done measure for {hardware.__class__.__name__} - measurement time: {h_time:,.4f} s - last call {last_duration:,.2f} s"
             )
         logger.info(
             f"{self._total_energy.kWh:.6f} kWh of electricity used since the beginning."
