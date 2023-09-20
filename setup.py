@@ -26,7 +26,6 @@ setuptools.setup(
     license_files=("LICENSE",),
     long_description=long_description,
     long_description_content_type="text/markdown",
-    license_files=("LICENSE",),
     packages=setuptools.find_packages(
         exclude=["*.tests", "*.tests.*", "tests.*", "tests"]
     ),
@@ -35,8 +34,8 @@ setuptools.setup(
     extras_require={
         "viz": ["dash", "dash_bootstrap_components < 1.0.0", "fire"],
         "dashboard": ["dash>=2.2.0", "plotly>=5.6.0", "dash_bootstrap_components"],
-        "dev": tests_require,
-    }
+        "dev": TEST_DEPENDENCIES,
+    },
     classifiers=[
         "Natural Language :: English",
         "Programming Language :: Python :: 3.7",
