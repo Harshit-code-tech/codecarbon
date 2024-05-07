@@ -34,7 +34,7 @@ idna==3.7
     # via requests
 nodeenv==1.8.0
     # via pre-commit
-numpy==1.26.4
+numpy==1.22.0
     # via pandas
 pandas==2.2.1
     # via hatch.envs.dev
